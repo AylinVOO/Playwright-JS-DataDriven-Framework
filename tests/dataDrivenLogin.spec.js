@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 //const { LoginPage } = require('../pages/loginPage'); 
-const { LoginPageV2 } = require('../pages/loginPageV2'); 
+const { LoginPageV2 } = require('../pages/LoginPageV2'); 
 
 const testData = require('./testData.json'); 
 
