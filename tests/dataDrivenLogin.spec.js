@@ -16,8 +16,15 @@ for (const user of testData)
         const loginPage = new LoginPageV2(page);
 
         // Use Secrets, otherwise use JSON
-        const finalUsername = process.env.SAUCE_USERNAME || user.username;
-        const finalPassword = process.env.SAUCE_PASSWORD || user.password;
+        let finalUsername = user.username;
+        let finalPassword = user.password;
+
+        // Only override if we are testing the standard user AND the secret exists
+        if (user.username === 'standard_user' && process.env.SAUCE_USERNAME) 
+        {
+            finalUsername = process.env.SAUCE_USERNAME;
+            finalPassword = process.env.SAUCE_PASSWORD;
+        }
 
         await loginPage.goto();
         await loginPage.login(finalUsername, finalPassword); 
