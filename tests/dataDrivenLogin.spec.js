@@ -15,8 +15,12 @@ for (const user of testData)
         //const loginPage = new LoginPage(page); 
         const loginPage = new LoginPageV2(page);
 
+        // Use Secrets, otherwise use JSON
+        const finalUsername = process.env.SAUCE_USERNAME || user.username;
+        const finalPassword = process.env.SAUCE_PASSWORD || user.password;
+
         await loginPage.goto();
-        await loginPage.login(user.username, user.password); 
+        await loginPage.login(finalUsername, finalPassword); 
         console.log(await page.content());
 
         // Asserts (The Checkpoints)
